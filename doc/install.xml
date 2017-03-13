@@ -37,7 +37,14 @@ crw-rw---- 1 root iocard 98, 49 2012-04-26 23:41 /dev/comedi0_subd1
 Usually these devices belong to the group <systemitem class="groupname">iocard</systemitem> as shown here. The only
 		  action you need to take is to become member of this group and
 		  then the &comedi; device is ready to be used.
+		  If this is not the case and you have the source tree, you can use the udev configuration file to setup the permissions
+		  <screen>
+		    sudo cp comedilib/etc/udev/z99_comedi.rules /etc/udev/rules.d/
+		    sudo service udev restart
+		 </screen>
+
 		</para>
+		
 
 		<para>
 		  There are a few PCI drivers that for one reason or another

@@ -21,8 +21,21 @@
         <para>
         The name of the module is called <filename>comedi</filename>. All the C functions, structs, and
         constants are directly available as is. So you can refer directly to the C
-        documentation for most of the usage. Note that, as in C, the functions either return the
-        successful result or an error code.  Unlike typical Python functions,
+        documentation for most of the usage.
+	As of 2017-03-12, the debian packages (<filename>comedilib-python</filename> and <filename>comedilib-python3</filename>) have broken backwards
+	compatibility, which means you should use <function>open()</function> instead of <function>comedi_open()</function>.
+	The rest of this guide assumes you have backwards compatibility turned on, which means you can use either function name.
+
+	If you are building comedilib yourself, you can turn backwards
+	compatibility off by editing <filename>comedilib/swig/comedi.i</filename> and uncommenting out as below:
+	<programlisting>
+#define SWIGPYTHONONLYSHORT
+	</programlisting>
+
+	Note that, as in C, many functions either return the
+        successful result or an error code.
+	Some return both as a tuple.
+	Unlike typical Python functions,
         no exceptions are generated on errors (excepted type-checking
         performed by SWIG). For example, to open a &comedi; device you can write in
         Python:
@@ -109,5 +122,24 @@ file = os.fdopen(fileno, 'r+')
 buf = numpy.fromfile(file, dtype=numpy.uint32, count=(nscans * nchans))
         </programlisting>
         </para>
+
+	<para>
+	  A short example demonstrating some of the features of the Python SWIG interface can be found in <filename>swig/python/test_comedi.py</filename>.
+	  This test file is a work in progress:  the command feature is still being fixed.
+	</para>
 	</section>
-</section>
+
+	<section id="perlbindings">
+		<title>Perl bindings</title>
+		<para>
+		  This documentation has not been written yet.
+		</para>
+
+
+	<section id="rubybindings">
+	  <title>Ruby bindings</title>
+	  <para>
+	    This documentation has not been written yet.
+	  </para>
+		
+      </section>

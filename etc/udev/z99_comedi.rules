@@ -3,7 +3,8 @@
 #persistent names in /dev/comedi/by-path/, setting permissions and
 #group ownership on the comedi device files, and examples showing
 #adjustment of a device file's buffer size.
-
+#On most systems, install this into /etc/udev/rules.d/
+#Then restart udev:  sudo service udev restart
 SUBSYSTEM!="comedi", GOTO="comedi_end"
 
 
@@ -27,13 +28,13 @@ KERNEL=="comedi[0-9]*subd[0-9]*", SUBSYSTEMS=="pci", SYMLINK+="comedi/by-path/pc
 
 
 # wide open device file permissions
-KERNEL=="comedi[0-9]*", MODE="0666"
+#KERNEL=="comedi[0-9]*", MODE="0666"
 
 # device files restricted to the "comedi" group
 #KERNEL=="comedi[0-9]*", MODE="0660", GROUP="comedi"
 
 # device files restricted to the "iocard" group
-#KERNEL=="comedi[0-9]*", MODE="0660", GROUP="iocard"
+KERNEL=="comedi[0-9]*", MODE="0660", GROUP="iocard"
 
 
 LABEL="comedi_add_end"
